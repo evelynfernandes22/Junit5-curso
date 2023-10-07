@@ -1,4 +1,6 @@
-package teste;
+package Contexto;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,17 +11,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import model.Calculadora;
+import contexto.Calculadora;
 
 public class CalculadoraTest {
 
 	private Calculadora calc = new Calculadora();
 	
 	/*
-	 * @BeforeEach e @AfterEach => Executam antes e depois de cada teste que existe na classe
-	 * @BeforeAll e @AfterAll => É uma única execução no clico de teste da classe, before no começo e after no final
+	 * @BeforeEach e @AfterEach => Executam antes e depois de cada Contexto que existe na classe
+	 * @BeforeAll e @AfterAll => É uma única execução no clico de Contexto da classe, before no começo e after no final
 	 */
 	
 	@BeforeEach
@@ -121,5 +125,24 @@ public class CalculadoraTest {
 		});
 		Assertions.assertEquals("/ by zero", exception.getMessage());
 	}
+	
+	@ParameterizedTest
+	@ValueSource(strings = {"Teste1" , "Teste2"})
+	public void testeStrings(String param) {
+		System.out.println(param);
+		assertNotNull(param);
+	}
+	@ParameterizedTest
+	@CsvSource(value = {
+			"6, 2, 3",
+			"6, -2, -3",
+			"10, 3, 3.3333332538604736",
+			"0, 2, 0"
+	})
+	public void deveDividirCorretamente(int numerador, int denominador, double resultado) {
+		float result = calc.dividir(numerador, denominador);
+		Assertions.assertEquals(resultado, result);
+	}
+	
 	
 }

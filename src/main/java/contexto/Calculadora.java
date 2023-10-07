@@ -1,8 +1,7 @@
-package model;
+package contexto;
 
 public class Calculadora {
 
-	
 	public Calculadora() {
 		System.out.println("instaciando calculadora");
 	}
