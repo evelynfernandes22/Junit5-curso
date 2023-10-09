@@ -1,12 +1,15 @@
 package br.evelyn.barriga.domain;
 
+import static br.evelyn.barriga.domain.builder.UsuarioBuilder.umUsuario;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.*;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
 
-import br.evelyn.barriga.domain.builders.UsuarioBuilder;
+import br.evelyn.barriga.domain.builder.UsuarioBuilder;
 import br.evelyn.barriga.domain.exceptions.ValidationException;
 
 public class UsuarioTest {
@@ -14,7 +17,7 @@ public class UsuarioTest {
 	@Test
 	@DisplayName("Deve criar um usuário válido")
 	public void deveCriarUsuarioValido() {
-		Usuario usuario = UsuarioBuilder.umUsuario().agora();
+		Usuario usuario = umUsuario().agora();
 		Assertions.assertAll("Usuario",
 				() -> assertEquals(1L, usuario.getId()),
 				() -> assertEquals("Usuario1", usuario.getNome()),
@@ -34,14 +37,14 @@ public class UsuarioTest {
 	@Test
 	public void deveRejeitarUsuarioSemEmail() {
 		ValidationException ex = Assertions.assertThrows(ValidationException.class, 
-				() -> UsuarioBuilder.umUsuario().comEmail(null).agora());
+				() -> umUsuario().comEmail(null).agora());
 				assertEquals("E-mail é obrigatório", ex.getMessage());
 	}
 	
 	@Test
 	public void deveRejeitarUsuarioSemSenha() {
 		ValidationException ex = Assertions.assertThrows(ValidationException.class, 
-				() -> UsuarioBuilder.umUsuario().comSenha(null).agora());
+				() -> umUsuario().comSenha(null).agora());
 		Assertions.assertEquals("Senha é obrigatória", ex.getMessage());
 	}
 	
@@ -56,7 +59,7 @@ public class UsuarioTest {
 //	}, nullValues = "NULL") 
 //	public void deveValidarCamposObrigatorios(Long id, String nome, String email, String senha, String mensagem) {
 //		ValidationException ex = Assertions.assertThrows(ValidationException.class, 
-//				() -> UsuarioBuilder.umUsuario().comId(id).comNome(nome).comEmail(email).comSenha(senha).agora());
+//				() -> UsuarioBuilderOld.umUsuario().comId(id).comNome(nome).comEmail(email).comSenha(senha).agora());
 //		Assertions.assertEquals(mensagem, ex.getMessage());
 //	}
 	
@@ -68,7 +71,7 @@ public class UsuarioTest {
 	@CsvFileSource(files = "src\\test\\resources\\camposObrigatoriosUsuarios.csv", nullValues = "NULL",useHeadersInDisplayName = true)
 	public void deveValidarCamposObrigatorios(Long id, String nome, String email, String senha, String mensagem) {
 		ValidationException ex = Assertions.assertThrows(ValidationException.class, 
-				() -> UsuarioBuilder.umUsuario().comId(id).comNome(nome).comEmail(email).comSenha(senha).agora());
+				() -> umUsuario().comId(id).comNome(nome).comEmail(email).comSenha(senha).agora());
 		Assertions.assertEquals(mensagem, ex.getMessage());
 	}
 }

@@ -1,4 +1,7 @@
-package br.evelyn.barriga.domain.builders;
+package br.evelyn.barriga.domain.builder;
+
+
+import java.util.Objects;
 
 import br.evelyn.barriga.domain.Usuario;
 
@@ -46,5 +49,23 @@ public class UsuarioBuilder {
 	public Usuario agora() {
 		return new Usuario(id, nome, email, senha);
 	}
-}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, nome, senha);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UsuarioBuilder other = (UsuarioBuilder) obj;
+		return Objects.equals(email, other.email) && Objects.equals(nome, other.nome)
+				&& Objects.equals(senha, other.senha);
+	}
+	
+}

@@ -1,4 +1,5 @@
-package br.evelyn.barriga.domain.builders;
+package br.evelyn.barriga.domain.builder;
+
 
 import static java.lang.String.format;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import br.evelyn.barriga.domain.Usuario;
+import br.evelyn.barriga.domain.Conta;
 
 /**
  * Classe responsável pela criação de builders de entidades
@@ -138,6 +139,8 @@ public class BuilderMaster {
 
 	public static void main(String[] args) {
 		BuilderMaster master = new BuilderMaster();
-		master.gerarCodigoClasse(Usuario.class);
+		master.gerarCodigoClasse(Conta.class);
 	}
 }
+
+

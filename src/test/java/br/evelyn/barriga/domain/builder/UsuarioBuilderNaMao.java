@@ -1,44 +1,44 @@
-package br.evelyn.barriga.domain.builders;
+package br.evelyn.barriga.domain.builder;
 
 import br.evelyn.barriga.domain.Usuario;
 
-public class UsuarioBuilderOld {
+public class UsuarioBuilderNaMao {
 	
 	private Long id;
 	private String nome;
 	private String email;
 	private String senha;
-	private UsuarioBuilderOld() {}
+	private UsuarioBuilderNaMao() {}
 	
-	public static UsuarioBuilderOld umUsuario() {
-		UsuarioBuilderOld builder = new UsuarioBuilderOld();
+	public static UsuarioBuilderNaMao umUsuario() {
+		UsuarioBuilderNaMao builder = new UsuarioBuilderNaMao();
 		InicializarDadosPadroes(builder);
 		return builder;
 	}
 
-	private static void InicializarDadosPadroes(UsuarioBuilderOld builder) {
+	private static void InicializarDadosPadroes(UsuarioBuilderNaMao builder) {
 		builder.id = 1L;
 		builder.nome = "Usuario1";
 		builder.email = "user@email.com";
 		builder.senha = "123";
 	}
 	
-	public UsuarioBuilderOld comId(Long param) {
+	public UsuarioBuilderNaMao comId(Long param) {
 		id = param;
 		return this;
 	}
 	
-	public UsuarioBuilderOld comNome (String param) {
+	public UsuarioBuilderNaMao comNome (String param) {
 		nome = param;
 		return this;
 	}
 	
-	public UsuarioBuilderOld comEmail (String param) {
+	public UsuarioBuilderNaMao comEmail (String param) {
 		email = param;
 		return this;
 	}
 	
-	public UsuarioBuilderOld comSenha (String param) {
+	public UsuarioBuilderNaMao comSenha (String param) {
 		senha = param;
 		return this;
 	}

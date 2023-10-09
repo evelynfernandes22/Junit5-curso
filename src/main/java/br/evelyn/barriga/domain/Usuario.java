@@ -1,8 +1,11 @@
 package br.evelyn.barriga.domain;
 
+import java.util.Objects;
+
 import br.evelyn.barriga.domain.exceptions.ValidationException;
 
 public class Usuario {
+	
 	private Long id;
 	private String nome;
 	private String email;
@@ -35,5 +38,29 @@ public class Usuario {
 		return senha;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, nome, senha);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(email, other.email) && Objects.equals(nome, other.nome)
+				&& Objects.equals(senha, other.senha);
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
+	}
+
+	
 	
 }
